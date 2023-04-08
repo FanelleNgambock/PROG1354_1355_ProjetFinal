@@ -81,7 +81,9 @@ void setup(){
   server.begin();
 }
  
-void loop(){}
+void loop(){
+  
+}
 
 
 String getResponse() {
@@ -95,7 +97,6 @@ String getResponse() {
     PressValue = bmp.readPressure();
     altValue = bmp.readAltitude(1013.25);
     Serial.println();
-    delay(2000);
   } else {
     Serial.println("Forced measurement failed!");
   }

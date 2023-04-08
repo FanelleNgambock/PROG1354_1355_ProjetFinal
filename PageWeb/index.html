@@ -96,7 +96,7 @@
     <script>
         // request to server
         var xhttp = new XMLHttpRequest();
-        xhttp.open("GET", "https://reqres.in/api/users/3", true);
+        xhttp.open("GET", "http://192.168.137.46/data", true);
         xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -104,20 +104,13 @@
                 // Response
                 var response = this.responseText; 
                 mydata = JSON.parse(response);
-                console.log(mydata.data.avatar);
+                console.log(mydata);
                //document.getElementById("photo").innerHTML = "<img src=\"" + mydata.data.avatar +  "\">";
                 //<img src= htt>
         }
         };
         xhttp.send();
 
-        $.ajax({
-        url: 'https://reqres.in/api/users/3',
-        type: 'get',
-        success: function(response){
-
-        }
-    });
         console.log("bonjour");
 
     </script>
