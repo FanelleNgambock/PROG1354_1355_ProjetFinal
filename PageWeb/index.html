@@ -97,25 +97,29 @@
 
     <script>
         // request to server
-        var xhttp = new XMLHttpRequest();
-        xhttp.open("GET", "http://192.168.137.46/data", true);
-        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
+        
+        setInterval(function() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "http://192.168.137.46/data", true);
+            xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
 
-                // Response
-                var response = this.responseText; 
-                mydata = JSON.parse(response);
-                console.log(mydata);
-                document.getElementById("temp").innerHTML = mydata.Temperature;
-                document.getElementById("pression").innerHTML = mydata.Pression;
-                document.getElementById("alt").innerHTML = mydata.Altitude;
-                //<img src= htt>
-        }
-        };
-        xhttp.send();
+                    // Response
+                    var response = this.responseText; 
+                    mydata = JSON.parse(response);
+                   // console.log(mydata);
+                    document.getElementById("temp").innerHTML = mydata.Temperature;
+                    document.getElementById("pression").innerHTML = mydata.Pression;
+                    document.getElementById("alt").innerHTML = mydata.Altitude;
+                    //<img src= htt>
+            }
+            };
+            xhttp.send();
+            //call $.ajax here
+        }, 1000); //5 seconds
 
-        console.log("bonjour");
+        //console.log("bonjour");
 
     </script>
 
