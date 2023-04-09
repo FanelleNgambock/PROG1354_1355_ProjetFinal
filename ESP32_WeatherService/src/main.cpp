@@ -3,16 +3,13 @@
   Complete project details at https://randomnerdtutorials.com  
 *********/
 
-#include <string>
-#include <iomanip>
-#include <iostream>
-#include <bits/stdc++.h>
-
 using namespace std;
 
 // Import required libraries
 #include "WiFi.h"
+#include <AsyncTCP.h>
 #include "ESPAsyncWebServer.h"
+#include <AsyncElegantOTA.h>
 
 #include <Adafruit_BMP280.h>
 
@@ -59,8 +56,12 @@ void setup(){
                   Adafruit_BMP280::FILTER_X16,      /* Filtering. */
                   Adafruit_BMP280::STANDBY_MS_500); /* Standby time. */
 
+
+
   // Serial port for debugging purposes
+  
   Serial.begin(9600);
+pinMode(LED_BUILTIN, OUTPUT);
   // Connect to Wi-Fi
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
@@ -77,12 +78,20 @@ void setup(){
     request->send_P(200, "text/plain", getResponse().c_str());
   });
 
+
+  AsyncElegantOTA.begin(&server);    // Start ElegantOTA
+
   // Start server
   server.begin();
+  Serial.println("HTTP server started");
 }
  
 void loop(){
-  
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(200);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(200);
+
 }
 
 
