@@ -30,10 +30,12 @@
                     </svg>
                 </div>
                 <div class="col-5">
-                    <p>Temperature</p>
+                    <p>Temperature
+                        
+                    </p>
                 </div>
                 <div class="col-4">
-                    <h2 class="info1">25<sup>C</sup></h2>
+                    <h2 class="info1"><span id="temp">25</span><sup>C</sup></h2>
                 </div>
 
                 </div>
@@ -68,7 +70,7 @@
                     <p>Pressure</p>
                 </div>
                 <div class="col-4">
-                    <h2 class="info3">950<sup>hpa</sup></h2>
+                    <h2 class="info3"><span id="pression">950</span><sup>hpa</sup></h2>
                 </div>
                 
             </div>
@@ -85,7 +87,7 @@
                     <p>Altitude</p>
                 </div>
                 <div class="col-4">
-                    <h2 class="info4">532<sup>m</sup></h2>
+                    <h2 class="info4"><span id="alt">532</span><sup>m</sup></h2>
                 </div>
             </div>
             <img src="">
@@ -105,7 +107,9 @@
                 var response = this.responseText; 
                 mydata = JSON.parse(response);
                 console.log(mydata);
-               //document.getElementById("photo").innerHTML = "<img src=\"" + mydata.data.avatar +  "\">";
+                document.getElementById("temp").innerHTML = mydata.Temperature;
+                document.getElementById("pression").innerHTML = mydata.Pression;
+                document.getElementById("alt").innerHTML = mydata.Altitude;
                 //<img src= htt>
         }
         };
