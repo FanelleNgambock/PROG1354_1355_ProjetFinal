@@ -1,65 +1,74 @@
-*{
+html{
     background-color: white;
-    margin: auto;
-    padding: 15px;
+    font-family: Arial;
+    display: inline-block;
+    text-align: center;
+    padding: 30px;
+
 }
 p
-{
-    color: black;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.5em;
-    text-align: center;
-    align-items: right;
+{   
+    font-size: 1.2rem;
 }
-h1
+
+body
 {
-    color: black;
-    font-family: Arial, Helvetica, sans-serif; 
-    font-size: 4em;
-    text-align: center;
-    align-items: center;
+    margin: 0;
+    box-shadow: 12px 12px 12px 11px rgba(140, 140, 140, 0.214);
+    border: 10px 15px 15px 15px black solid;
 }
-h2
+
+.top
 {
-   
-   font-family: Arial, Helvetica, sans-serif; 
-   text-align: center;
-   font-size: 2.5em;
+    background-color: #4b1d3f;
+    color: white;
+    font-size: 1.7rem;
+    overflow: hidden;
 }
+
 .container
 {
-    padding: 0px;
-    margin: 0px;
-    border-color: black;
-    box-shadow: 15px;
-}
-.info1{
-    text-align: center;
-    color: orange;
-
-}
-.info2{
-    text-align: center;
-    color:skyblue;
-
-}
-.info3{
-    text-align: center;
-    color: lightgreen;
-
-}
-.info4{
-    text-align: center;
-    color: purple;
-
+    padding: 20px;
+    
 }
 
-row
+.colum-sm-12
 {
-    margin: 10px;
-    padding: 30px;
-    color: black;
-    border-color: black;
+    gap: 10px;
+    background-color: white;
+    padding: 25px;
+    margin-bottom: 30px;
+}
+
+.value
+{
+    font-size: 2.8rem;
+}
+
+.grid
+{
+    max-width: 700px;
+    height: 15rem;
+    margin: 0 auto;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    box-shadow: 10px 15px 2px 1px rgba(140, 140, 140, 0.214);
+}
+
+.temperature
+{
+    color: #0e7c7b;
+}
+
+.pressure
+{
+    color: #3fca6b;
+}
+
+.altitude
+{
+    color: #d62246;
 }
 
 
