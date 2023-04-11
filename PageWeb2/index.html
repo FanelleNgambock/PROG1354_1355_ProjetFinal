@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="refresh" content="3">
+
+        <title>station meteo</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" type="text/css">
+        <link href="fichier.css" rel="stylesheet">
+        
+    </head>
+    <body>
+        <div class="container">
+
+        
+            <div class="row">
+                <h1>ESP32 BMP Weather Station</h1>
+            </div>
+            
+
+            <hr>
+                <div class="row">
+                    <div class="col-3">
+                        <svg xmlns="http://www.w3.org/2000/svg"  style ="width:100px; height:100px" fill="orange" class="bi bi-thermometer-half" viewBox="0 0 16 16">
+                            <path d="M9.5 12.5a1.5 1.5 0 1 1-2-1.415V6.5a.5.5 0 0 1 1 0v4.585a1.5 1.5 0 0 1 1 1.415z"/>
+                            <path d="M5.5 2.5a2.5 2.5 0 0 1 5 0v7.55a3.5 3.5 0 1 1-5 0V2.5zM8 1a1.5 1.5 0 0 0-1.5 1.5v7.987l-.167.15a2.5 2.5 0 1 0 3.333 0l-.166-.15V2.5A1.5 1.5 0 0 0 8 1z"/>
+                        </svg>
+                    </div>
+                    <div class="col-5">
+                        <p>Temperature</p>
+                    </div>
+                    <div class="col-4">
+                        <h2 class="info1 text-center"><span id="temp">25</span><sup>C</sup></h2>
+                    </div>
+
+                    </div>
+                </div>
+            </hr>
+
+            <hr>
+                <div class="row">
+                    <div class="col-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" style="width:100px; height:100px" fill="lightgreen"class="bi bi-speedometer" viewBox="0 0 16 16">
+                            <path d="M8 2a.5.5 0 0 1 .5.5V4a.5.5 0 0 1-1 0V2.5A.5.5 0 0 1 8 2zM3.732 3.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 8a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 8zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 7.31A.91.91 0 1 0 8.85 8.569l3.434-4.297a.389.389 0 0 0-.029-.518z"/>
+                            <path fill-rule="evenodd" d="M6.664 15.889A8 8 0 1 1 9.336.11a8 8 0 0 1-2.672 15.78zm-4.665-4.283A11.945 11.945 0 0 1 8 10c2.186 0 4.236.585 6.001 1.606a7 7 0 1 0-12.002 0z"/>
+                        </svg>
+                    </div>
+                    <div class="col-5">
+                        <p>Pressure</p>
+                    </div>
+                    <div class="col-4">
+                        <h2 class="info3"><span id="pression">950</span><sup>hpa</sup></h2>
+                    </div>
+                    
+                </div>
+            </hr>
+
+            <hr>
+                <div class="row">
+                    <div class="col-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="purple" class="bi bi-triangle-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M7.022 1.566a1.13 1.13 0 0 1 1.96 0l6.857 11.667c.457.778-.092 1.767-.98 1.767H1.144c-.889 0-1.437-.99-.98-1.767L7.022 1.566z"/>
+                        </svg>
+                    </div>
+                    <div class="col-5">
+                        <p>Altitude</p>
+                    </div>
+                    <div class="col-4">
+                        <h2 class="info4"><span id="alt">532</span><sup>m</sup></h2>
+                    </div>
+                </div>
+                
+            </hr>
+
+        </div>
+
+        <script>
+            setInterval(function() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "http://192.168.137.46/data", true);
+            xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+
+                    // Response
+                    var response = this.responseText; 
+                    mydata = JSON.parse(response);
+                   // console.log(mydata);
+                    document.getElementById("temp").innerHTML = mydata.Temperature;
+                    document.getElementById("pression").innerHTML = mydata.Pression;
+                    document.getElementById("alt").innerHTML = mydata.Altitude;
+                    //<img src= htt>
+            }
+            };
+            xhttp.send();
+            //call $.ajax here
+        }, 1000); //5 seconds
+
+        </script>
+
+    </body>
+</html>
