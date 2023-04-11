@@ -26,12 +26,12 @@ Adafruit_BMP280 bmp; // I2C
 //Adafruit_BMP280 bmp(BMP_CS); // hardware SPI
 //Adafruit_BMP280 bmp(BMP_CS, BMP_MOSI, BMP_MISO,  BMP_SCK);
 
-// Replace with your network credentials
+// remplacer le ssid et le mot de passe
 
 const char* ssid = "NPF";
 const char* password = "12345678";
 
-// Create AsyncWebServer object on port 80
+// Creation du serveur web sur le port 80
 AsyncWebServer server(80);
 
 String getResponse();
@@ -39,7 +39,8 @@ String getResponse();
 
 void setup(){
 
-  Serial.begin(9600);
+  Serial.begin(9600);//initialisation du moniteur serie
+
   Serial.println(F("BMP280 Forced Mode Test."));
 
   //if (!bmp.begin(BMP280_ADDRESS_ALT, BMP280_CHIPID)) {
@@ -69,7 +70,7 @@ pinMode(LED_BUILTIN, OUTPUT);
     Serial.println("Connecting to WiFi..");
   }
 
-  // Print ESP32 Local IP Address
+  // Affichage de l4adresse IP locale de l'ESP
   Serial.println(WiFi.localIP());
 
 
@@ -94,11 +95,9 @@ void loop(){
 
 }
 
-
+//Fonction permettant le service ou la reponse a la requete du client par les donnees obtenues du capteur
 String getResponse() {
-  // Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
-  // must call this to wake sensor up and get new measurement data
-  // it blocks until measurement is complete
+
   if (bmp.takeForcedMeasurement()) {
     // can now print out the new measurements
 
@@ -109,7 +108,7 @@ String getResponse() {
   } else {
     Serial.println("Forced measurement failed!");
   }
-
+  //conversion des valeurs float en string
   String tmp = String(tempValue, 2);
 
   String pression = String(PressValue, 2);
